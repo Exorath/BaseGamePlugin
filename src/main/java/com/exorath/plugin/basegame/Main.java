@@ -16,7 +16,6 @@
 
 package com.exorath.plugin.basegame;
 
-import com.exorath.plugin.basegame.flavor.FlavorManager;
 import com.exorath.plugin.basegame.gamePublisher.GamePublishManager;
 import com.exorath.plugin.basegame.maps.MapsManager;
 import com.exorath.plugin.basegame.state.StateManager;
@@ -34,12 +33,10 @@ public class Main extends JavaPlugin{
     public void onEnable() {
         Main.instance = this;
         Main.baseGameAPI = new SimpleBaseGameAPI();
-        Main.getBaseGameAPI().addManager(new FlavorManager(getConfig()));
         Main.getBaseGameAPI().addManager(new StateManager());
         Main.getBaseGameAPI().addManager(new MapsManager());
         Main.getBaseGameAPI().addManager(new GamePublishManager(getConfig(),
-                Main.getBaseGameAPI().getManager(MapsManager.class).getGameMap().getMapName(),
-                Main.getBaseGameAPI().getManager(FlavorManager.class).getFlavor()));
+                Main.getBaseGameAPI().getManager(MapsManager.class).getGameMap().getMapName()));
     }
 
     public static Main getInstance() {

@@ -24,16 +24,24 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import java.net.UnknownHostException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Created by toonsev on 3/14/2017.
  */
 public class GamePublishManager implements Manager{
+    private static Random random = new Random();
+    private String flavor;
+
     FileConfiguration configuration;
-    public GamePublishManager(FileConfiguration configuration, String mapId, String flavorId) {
+    public GamePublishManager(FileConfiguration configuration, String mapId) {
         this.configuration = configuration;
+        List<String> flavors = getFlavors();
+        this.flavor = flavors.get(random.nextInt(flavors.size()));
         try {
-            ExoBaseAPI.getInstance().setupGame(new BasicServer(getGameId(), mapId, flavorId));//TODO: Fetch mapId and flavorId propperly
+            ExoBaseAPI.getInstance().setupGame(new BasicServer(getGameId(), mapId, flavor));
         } catch (UnknownHostException e) {
             e.printStackTrace();
             Main.terminate();
@@ -55,5 +63,17 @@ public class GamePublishManager implements Manager{
             Main.terminate();
         }
         return configuration.getString("connector.gameId");
+    }
+
+
+    public String getFlavor() {
+        return flavor;
+    }
+
+    private List<String> getFlavors(){
+        List<String> flavors = configuration.getStringList("game.flavors");
+        if(flavors == null || flavors.isEmpty())
+            return Arrays.asList(new String[]{"default"});
+        return flavors;
     }
 }
