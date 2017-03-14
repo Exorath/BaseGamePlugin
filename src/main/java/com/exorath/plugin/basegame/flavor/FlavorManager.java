@@ -46,7 +46,7 @@ public class FlavorManager implements Manager {
     }
 
     private List<String> loadFlavorsFromConfig(){
-        List<String> flavors = configuration.getStringList("game.flavors");
+        List<String> flavors = configuration.getStringList("connector.flavorIds");
         if(flavors == null || flavors.isEmpty())
             return Arrays.asList(new String[]{"default"});
         return flavors;
