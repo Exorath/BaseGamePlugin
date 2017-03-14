@@ -27,6 +27,7 @@ import java.util.HashMap;
  */
 public class SimpleBaseGameAPI implements BaseGameAPI{
     private HashMap<Class<? extends Manager>, Manager> managers = new HashMap<>();
+
     @Override
     public void addManager(Manager manager) {
             managers.put(manager.getClass(), manager);
