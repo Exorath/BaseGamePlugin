@@ -28,11 +28,12 @@ import java.util.Random;
  */
 public class FlavorManager implements Manager {
     private static Random random = new Random();
+    private List<String> flavors;
     private String flavor;
     private FileConfiguration configuration;
     public FlavorManager(FileConfiguration configuration){
         this.configuration = configuration;
-        List<String> flavors = getFlavors();
+        this.flavors = loadFlavorsFromConfig();
         this.flavor = flavors.get(random.nextInt(flavors.size()));
     }
 
@@ -40,7 +41,11 @@ public class FlavorManager implements Manager {
         return flavor;
     }
 
-    private List<String> getFlavors(){
+    public List<String> getFlavors() {
+        return flavors;
+    }
+
+    private List<String> loadFlavorsFromConfig(){
         List<String> flavors = configuration.getStringList("game.flavors");
         if(flavors == null || flavors.isEmpty())
             return Arrays.asList(new String[]{"default"});
