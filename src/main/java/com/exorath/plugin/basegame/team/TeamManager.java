@@ -17,6 +17,7 @@
 package com.exorath.plugin.basegame.team;
 
 import com.exorath.exoteams.TeamAPI;
+import com.exorath.exoteams.player.TeamPlayer;
 import com.exorath.plugin.basegame.manager.Manager;
 
 /**
@@ -31,5 +32,44 @@ public class TeamManager implements Manager{
 
     public TeamAPI getTeamAPI() {
         return teamAPI;
+    }
+
+    public static TeamPlayer getTeamPlayer(String uuid){
+        return new UUIDTeamPlayer(uuid);
+    }
+
+    private static class UUIDTeamPlayer implements TeamPlayer{
+        private String uuid;
+        public UUIDTeamPlayer(String uuid) {
+            this.uuid = uuid;
+        }
+
+        @Override
+        public int hashCode() {
+            return uuid.hashCode();
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if(obj == null)
+                return false;
+            if(!(obj instanceof UUIDTeamPlayer))
+                return false;
+            return uuid.equals(((UUIDTeamPlayer) obj).getUuid());
+        }
+
+        public String getUuid() {
+            return uuid;
+        }
+
+        @Override
+        protected Object clone() throws CloneNotSupportedException {
+            return new UUIDTeamPlayer(uuid);
+        }
+
+        @Override
+        public String toString() {
+            return uuid.toString();
+        }
     }
 }
