@@ -29,7 +29,7 @@ public interface BaseGameAPI {
 
     <T extends Manager> void removeManager(Class<T> managerClass);
 
-    static BaseGameAPI getInstace(){
+    static BaseGameAPI getInstance(){
         return Main.getBaseGameAPI();
     }
 
