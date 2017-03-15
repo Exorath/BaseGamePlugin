@@ -22,7 +22,7 @@
 
     <groupId>com.exorath</groupId>
     <artifactId>BaseGamePlugin</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.6</version>
 
     <build>
         <plugins>
@@ -89,7 +89,7 @@
         <dependency>
             <groupId>com.github.Exorath</groupId>
             <artifactId>ExoTeams</artifactId>
-            <version>0.0.1</version>
+            <version>1.0.2</version>
         </dependency>
         <dependency>
             <groupId>com.github.Exorath</groupId>
