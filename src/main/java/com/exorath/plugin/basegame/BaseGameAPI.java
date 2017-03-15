@@ -16,6 +16,7 @@
 
 package com.exorath.plugin.basegame;
 
+import com.exorath.exoteams.TeamAPI;
 import com.exorath.plugin.basegame.manager.Manager;
 import org.bukkit.entity.Player;
 
@@ -29,6 +30,7 @@ public interface BaseGameAPI {
 
     <T extends Manager> void removeManager(Class<T> managerClass);
 
+    TeamAPI getTeamAPI();
     static BaseGameAPI getInstance(){
         return Main.getBaseGameAPI();
     }

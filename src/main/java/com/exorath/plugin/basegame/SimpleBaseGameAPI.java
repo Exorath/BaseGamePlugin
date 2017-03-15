@@ -16,8 +16,10 @@
 
 package com.exorath.plugin.basegame;
 
+import com.exorath.exoteams.TeamAPI;
 import com.exorath.plugin.basegame.gamePublisher.GamePublishManager;
 import com.exorath.plugin.basegame.manager.Manager;
+import com.exorath.plugin.basegame.team.TeamManager;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -41,6 +43,12 @@ public class SimpleBaseGameAPI implements BaseGameAPI{
     @Override
     public <T extends Manager> void removeManager(Class<T> managerClass) {
         managers.remove(managerClass);
+    }
+
+    @Override
+    public TeamAPI getTeamAPI() {
+        TeamManager teamManager = getManager(TeamManager.class);
+        return teamManager == null ? null : teamManager.getTeamAPI();
     }
 
     @Override
