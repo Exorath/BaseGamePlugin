@@ -37,7 +37,7 @@ public class Main extends JavaPlugin{
         Main.baseGameAPI = new SimpleBaseGameAPI();
         Main.getBaseGameAPI().addManager(new FlavorManager(getConfig()));
         Main.getBaseGameAPI().addManager(new StateManager());
-        Main.getBaseGameAPI().addManager(new MapsManager());
+        Main.getBaseGameAPI().addManager(new MapsManager(baseGameAPI.getManager(FlavorManager.class).getFlavor()));
         Main.getBaseGameAPI().addManager(new GamePublishManager(getConfig(),
                 Main.getBaseGameAPI().getManager(MapsManager.class).getGameMap().getMapName(),
                 Main.getBaseGameAPI().getManager(FlavorManager.class).getFlavor()));
