@@ -1,4 +1,4 @@
-name: ActionAPI
+name: BaseGame
 main: com.exorath.plugin.basegame.Main
 version: 0.0.1
 author: Toon Sevrin
