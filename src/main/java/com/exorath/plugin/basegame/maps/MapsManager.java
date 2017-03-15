@@ -24,6 +24,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * A map is defined as a folder in the server root with an exomap.yml file in it.
@@ -32,31 +33,36 @@ import java.util.Random;
 public class MapsManager implements Manager {
     private ExoWorld gameMap;
 
+    public MapsManager(String flavor) {
+        selectMap(flavor);
+    }
 
-    private void selectMap() {
-        List<String> mapNames = getExoMapNames();
-        if (mapNames.size() == 0) {
+    private void selectMap(String flavor) {
+        List<ExoWorld> exoWorlds = getExoMapNames().stream()
+                .filter(exoWorld -> exoWorld.getSupportedFlavors().contains(flavor))
+                .collect(Collectors.toList());
+        if (exoWorlds.size() == 0) {
             System.out.println("No maps found, add a map with an exomap.yml");
             Main.terminate();
         }
-        String randomMapName = mapNames.get(new Random().nextInt(mapNames.size()));
-        gameMap = new ExoWorld(randomMapName);
+
+        this.gameMap = exoWorlds.get(new Random().nextInt(exoWorlds.size()));
         if (gameMap.getConfiguration() == null) {
             System.out.println("The map " + gameMap.getMapName() + " is not configured. Please add an exomap.yml Shutting down!");
             Main.terminate();
         }
     }
 
-    private List<String> getExoMapNames() {
+    private List<ExoWorld> getExoMapNames() {
         File mapContainer = Bukkit.getWorldContainer();
-        List<String> mapNames = new ArrayList<>();
+        List<ExoWorld> exoWorlds = new ArrayList<>();
         for (File mapDir : mapContainer.listFiles((dir, name) -> new File(dir, name).isDirectory())) {
             File exoDat = new File(mapDir, "exomap.yml");
             if (!exoDat.isFile())
                 continue;
-            mapNames.add(mapDir.getName());
+            exoWorlds.add(new ExoWorld(mapDir.getName()));
         }
-        return mapNames;
+        return exoWorlds;
     }
 
     public ExoWorld getGameMap() {

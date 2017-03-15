@@ -23,6 +23,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by toonsev on 2/6/2017.
@@ -39,10 +41,16 @@ public class ExoWorld {
             System.out.println("1V1PLUGIN ERROR: Tried to initialize world '" + mapName + "' which does not exist.");
             System.exit(1);
         }
-        File configFile = new File(worldDir, "exorath.yml");
+        File configFile = new File(worldDir, "exomap.yml");
         if(configFile.isFile())
             configuration = YamlConfiguration.loadConfiguration(configFile);
-        world = WorldCreator.name(mapName).createWorld();
+    }
+
+    public List<String> getSupportedFlavors(){
+        if(configuration == null)
+            return new ArrayList<>();
+        List<String> flavors = configuration.getStringList("flavorIds");
+        return flavors == null ? new ArrayList<>() : flavors;
     }
 
     public String getMapName() {
@@ -54,6 +62,8 @@ public class ExoWorld {
     }
 
     public World getWorld(){
+        if(world == null)
+            world = WorldCreator.name(mapName).createWorld();
         return world;
     }
 }
