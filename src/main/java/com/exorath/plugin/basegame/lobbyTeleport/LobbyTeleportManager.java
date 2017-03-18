@@ -24,14 +24,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerJoinEvent;
 
 /**
  * Created by toonsev on 3/18/2017.
  */
-public class StateTeleportManager implements ListeningManager {
+public class LobbyTeleportManager implements ListeningManager {
     private Location lobbySpawn;
 
-    public StateTeleportManager(Location lobbySpawn){
+    public LobbyTeleportManager(Location lobbySpawn){
         this.lobbySpawn = lobbySpawn;
         if(lobbySpawn == null)
             Main.terminate("NO lobbySpawn found");
@@ -41,5 +42,9 @@ public class StateTeleportManager implements ListeningManager {
         if (event.getNewState() == State.WAITING_FOR_PLAYERS && event.getOldState() != State.COUNTING_DOWN)
             for(Player player : Bukkit.getOnlinePlayers())
                 player.teleport(lobbySpawn);
+    }
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event){
+        event.getPlayer().teleport(lobbySpawn);
     }
 }
