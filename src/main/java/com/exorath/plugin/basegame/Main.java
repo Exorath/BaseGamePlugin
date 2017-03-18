@@ -16,6 +16,7 @@
 
 package com.exorath.plugin.basegame;
 
+import com.exorath.plugin.basegame.clickableEntities.ClickableEntitiesManager;
 import com.exorath.plugin.basegame.countdown.CountdownManager;
 import com.exorath.plugin.basegame.flavor.FlavorManager;
 import com.exorath.plugin.basegame.gamePublisher.GamePublishManager;
@@ -46,6 +47,7 @@ public class Main extends JavaPlugin {
         Main.getBaseGameAPI().addManager(new TeamManager(baseGameAPI.getStateManager()));
         Main.getBaseGameAPI().addManager(new LobbyTeleportManager(baseGameAPI.getMapsManager().getGameMap().getLobbySpawn()));
         Main.getBaseGameAPI().addManager(new CountdownManager(baseGameAPI.getStateManager(), baseGameAPI.getTeamAPI()));
+        Main.getBaseGameAPI().addManager(new ClickableEntitiesManager(this));
 
     }
 

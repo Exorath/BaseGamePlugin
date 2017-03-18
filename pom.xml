@@ -97,5 +97,11 @@
             <version>f6a1372b0b</version>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.Exorath</groupId>
+            <artifactId>ClickableEntities</artifactId>
+            <version>0.0.1</version>
+        </dependency>
     </dependencies>
 </project>
