@@ -27,7 +27,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 /**
  * Created by toonsev on 3/14/2017.
  */
-public class Main extends JavaPlugin{
+public class Main extends JavaPlugin {
     private static Main instance;
     private static BaseGameAPI baseGameAPI;
 
@@ -39,9 +39,9 @@ public class Main extends JavaPlugin{
         Main.getBaseGameAPI().addManager(new StateManager());
         Main.getBaseGameAPI().addManager(new MapsManager(baseGameAPI.getManager(FlavorManager.class).getFlavor()));
         Main.getBaseGameAPI().addManager(new GamePublishManager(getConfig(),
-                Main.getBaseGameAPI().getManager(MapsManager.class).getGameMap().getMapName(),
+                baseGameAPI.getMapsManager().getGameMap().getMapName(),
                 Main.getBaseGameAPI().getManager(FlavorManager.class).getFlavor()));
-        Main.getBaseGameAPI().addManager(new TeamManager());
+        Main.getBaseGameAPI().addManager(new TeamManager(baseGameAPI.getStateManager()));
     }
 
     public static Main getInstance() {
@@ -54,6 +54,13 @@ public class Main extends JavaPlugin{
     }
 
     public static void terminate() {
+        System.out.println("1v1Plugin is terminating...");
+        Bukkit.shutdown();
+        System.out.println("Termination failed, force exiting system...");
+        System.exit(1);
+    }
+    public static void terminate(String message) {
+        System.out.println(message);
         System.out.println("1v1Plugin is terminating...");
         Bukkit.shutdown();
         System.out.println("Termination failed, force exiting system...");

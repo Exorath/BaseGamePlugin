@@ -22,19 +22,23 @@ import com.exorath.plugin.basegame.manager.Manager;
 import com.exorath.plugin.basegame.maps.MapsManager;
 import com.exorath.plugin.basegame.state.StateManager;
 import com.exorath.plugin.basegame.team.TeamManager;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 
 import java.util.HashMap;
 
 /**
  * Created by toonsev on 3/14/2017.
  */
-public class SimpleBaseGameAPI implements BaseGameAPI{
+public class SimpleBaseGameAPI implements BaseGameAPI {
     private HashMap<Class<? extends Manager>, Manager> managers = new HashMap<>();
 
     @Override
     public void addManager(Manager manager) {
-            managers.put(manager.getClass(), manager);
+        if (manager instanceof Listener)
+            Bukkit.getPluginManager().registerEvents((Listener) manager, Main.getInstance());
+        managers.put(manager.getClass(), manager);
     }
 
     @Override
@@ -66,14 +70,14 @@ public class SimpleBaseGameAPI implements BaseGameAPI{
     @Override
     public void onPlayerJoinGame(Player player) {
         GamePublishManager gamePublishManager = getManager(GamePublishManager.class);
-        if(gamePublishManager != null)
+        if (gamePublishManager != null)
             gamePublishManager.onJoin(player);
     }
 
     @Override
     public void onPlayerLeaveGame(Player player) {
         GamePublishManager gamePublishManager = getManager(GamePublishManager.class);
-        if(gamePublishManager != null)
+        if (gamePublishManager != null)
             gamePublishManager.onLeave(player);
     }
 

@@ -41,16 +41,12 @@ public class MapsManager implements Manager {
         List<ExoWorld> exoWorlds = getExoMapNames().stream()
                 .filter(exoWorld -> exoWorld.getSupportedFlavors().contains(flavor))
                 .collect(Collectors.toList());
-        if (exoWorlds.size() == 0) {
-            System.out.println("No maps found, add a map with an exomap.yml");
-            Main.terminate();
-        }
+        if (exoWorlds.size() == 0)
+            Main.terminate("No maps found, add a map with an exomap.yml");
 
         this.gameMap = exoWorlds.get(new Random().nextInt(exoWorlds.size()));
-        if (gameMap.getConfiguration() == null) {
-            System.out.println("The map " + gameMap.getMapName() + " is not configured. Please add an exomap.yml Shutting down!");
-            Main.terminate();
-        }
+        if (gameMap.getConfiguration() == null)
+            Main.terminate("The map " + gameMap.getMapName() + " is not configured. Please add an exomap.yml Shutting down!");
     }
 
     private List<ExoWorld> getExoMapNames() {

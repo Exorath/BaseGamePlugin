@@ -16,7 +16,10 @@
 
 package com.exorath.plugin.basegame.maps;
 
+import com.exorath.plugin.basegame.Main;
+import com.exorath.plugin.basegame.lib.LocationSerialization;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -37,15 +40,18 @@ public class ExoWorld {
     public ExoWorld(String mapName){
         this.mapName = mapName;
         File worldDir = new File(Bukkit.getWorldContainer(), mapName);
-        if(!worldDir.isDirectory()){
-            System.out.println("1V1PLUGIN ERROR: Tried to initialize world '" + mapName + "' which does not exist.");
-            System.exit(1);
-        }
+        if(!worldDir.isDirectory())
+            Main.terminate("1V1PLUGIN ERROR: Tried to initialize world '" + mapName + "' which does not exist.");
         File configFile = new File(worldDir, "exomap.yml");
         if(configFile.isFile())
             configuration = YamlConfiguration.loadConfiguration(configFile);
     }
 
+    public Location getLobbySpawn(){
+        if(!configuration.contains("lobby.spawn"))
+            Main.terminate("No lobby.spawn found in exo world config");
+        return LocationSerialization.getLocation(world, configuration.getConfigurationSection("lobby.spawn"));
+    }
     public List<String> getSupportedFlavors(){
         if(configuration == null)
             return new ArrayList<>();

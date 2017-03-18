@@ -19,6 +19,10 @@ package com.exorath.plugin.basegame.team;
 import com.exorath.exoteams.TeamAPI;
 import com.exorath.exoteams.player.TeamPlayer;
 import com.exorath.plugin.basegame.manager.Manager;
+import com.exorath.plugin.basegame.state.State;
+import com.exorath.plugin.basegame.state.StateChangeEvent;
+import com.exorath.plugin.basegame.state.StateManager;
+import org.bukkit.event.EventHandler;
 
 /**
  * Created by toonsev on 3/15/2017.
@@ -26,8 +30,22 @@ import com.exorath.plugin.basegame.manager.Manager;
 public class TeamManager implements Manager{
     private TeamAPI teamAPI;
 
-    public TeamManager() {
+    private StateManager stateManager;
+
+    public TeamManager(StateManager stateManager) {
         this.teamAPI = new TeamAPI();
+        this.stateManager = stateManager;
+        teamAPI.getGlobalStartRule().getObservableEvaluation().subscribe(canStart -> {
+            if(stateManager.getState() == State.WAITING_FOR_PLAYERS)
+                stateManager.setState(State.COUNTING_DOWN);
+        });
+    }
+
+    @EventHandler
+    public void onStateChange(StateChangeEvent stateChangeEvent){
+        if(stateChangeEvent.getNewState() == State.WAITING_FOR_PLAYERS)
+            if(teamAPI.getGlobalStartRule().evaluate())
+                stateManager.setState(State.COUNTING_DOWN);
     }
 
     public TeamAPI getTeamAPI() {
