@@ -19,6 +19,8 @@ package com.exorath.plugin.basegame;
 import com.exorath.exoteams.TeamAPI;
 import com.exorath.plugin.basegame.manager.Manager;
 import com.exorath.plugin.basegame.maps.MapsManager;
+import com.exorath.plugin.basegame.state.State;
+import com.exorath.plugin.basegame.state.StateManager;
 import org.bukkit.entity.Player;
 
 /**
@@ -50,4 +52,10 @@ public interface BaseGameAPI {
      * @param player the player that left the game
      */
     void onPlayerLeaveGame(Player player);
+
+    /**
+     * Gets the statemanager
+     * @return
+     */
+    StateManager getStateManager();
 }

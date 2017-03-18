@@ -20,6 +20,7 @@ import com.exorath.exoteams.TeamAPI;
 import com.exorath.plugin.basegame.gamePublisher.GamePublishManager;
 import com.exorath.plugin.basegame.manager.Manager;
 import com.exorath.plugin.basegame.maps.MapsManager;
+import com.exorath.plugin.basegame.state.StateManager;
 import com.exorath.plugin.basegame.team.TeamManager;
 import org.bukkit.entity.Player;
 
@@ -58,6 +59,11 @@ public class SimpleBaseGameAPI implements BaseGameAPI{
     }
 
     @Override
+    public StateManager getStateManager() {
+        return getManager(StateManager.class);
+    }
+
+    @Override
     public void onPlayerJoinGame(Player player) {
         GamePublishManager gamePublishManager = getManager(GamePublishManager.class);
         if(gamePublishManager != null)
@@ -70,4 +76,5 @@ public class SimpleBaseGameAPI implements BaseGameAPI{
         if(gamePublishManager != null)
             gamePublishManager.onLeave(player);
     }
+
 }
