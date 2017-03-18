@@ -16,12 +16,14 @@
 
 package com.exorath.plugin.basegame;
 
+import com.exorath.exomenus.MenuAPI;
 import com.exorath.plugin.basegame.clickableEntities.ClickableEntitiesManager;
 import com.exorath.plugin.basegame.countdown.CountdownManager;
 import com.exorath.plugin.basegame.flavor.FlavorManager;
 import com.exorath.plugin.basegame.gamePublisher.GamePublishManager;
 import com.exorath.plugin.basegame.lobbyTeleport.LobbyTeleportManager;
 import com.exorath.plugin.basegame.maps.MapsManager;
+import com.exorath.plugin.basegame.menus.MenuManager;
 import com.exorath.plugin.basegame.state.StateManager;
 import com.exorath.plugin.basegame.team.TeamManager;
 import org.bukkit.Bukkit;
@@ -48,6 +50,7 @@ public class Main extends JavaPlugin {
         Main.getBaseGameAPI().addManager(new LobbyTeleportManager(baseGameAPI.getMapsManager().getGameMap().getLobbySpawn()));
         Main.getBaseGameAPI().addManager(new CountdownManager(baseGameAPI.getStateManager(), baseGameAPI.getTeamAPI()));
         Main.getBaseGameAPI().addManager(new ClickableEntitiesManager(this));
+        Main.getBaseGameAPI().addManager(new MenuManager(new MenuAPI(this)));
 
     }
 

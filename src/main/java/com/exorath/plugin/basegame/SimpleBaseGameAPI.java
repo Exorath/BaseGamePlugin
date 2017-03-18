@@ -16,10 +16,12 @@
 
 package com.exorath.plugin.basegame;
 
+import com.exorath.exomenus.MenuAPI;
 import com.exorath.exoteams.TeamAPI;
 import com.exorath.plugin.basegame.gamePublisher.GamePublishManager;
 import com.exorath.plugin.basegame.manager.Manager;
 import com.exorath.plugin.basegame.maps.MapsManager;
+import com.exorath.plugin.basegame.menus.MenuManager;
 import com.exorath.plugin.basegame.state.StateManager;
 import com.exorath.plugin.basegame.team.TeamManager;
 import org.bukkit.Bukkit;
@@ -58,6 +60,11 @@ public class SimpleBaseGameAPI implements BaseGameAPI {
     }
 
     @Override
+    public MenuAPI getMenuAPI() {
+        return getManager(MenuManager.class).getMenuAPI();
+    }
+
+    @Override
     public MapsManager getMapsManager() {
         return getManager(MapsManager.class);
     }
@@ -80,5 +87,6 @@ public class SimpleBaseGameAPI implements BaseGameAPI {
         if (gamePublishManager != null)
             gamePublishManager.onLeave(player);
     }
+
 
 }
