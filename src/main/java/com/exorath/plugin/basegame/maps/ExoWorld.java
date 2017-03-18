@@ -50,7 +50,7 @@ public class ExoWorld {
     public Location getLobbySpawn(){
         if(!configuration.contains("lobby.spawn"))
             Main.terminate("No lobby.spawn found in exo world config");
-        return LocationSerialization.getLocation(world, configuration.getConfigurationSection("lobby.spawn"));
+        return LocationSerialization.getLocation(getWorld(), configuration.getConfigurationSection("lobby.spawn"));
     }
     public List<String> getSupportedFlavors(){
         if(configuration == null)
