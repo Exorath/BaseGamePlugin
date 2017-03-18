@@ -22,7 +22,11 @@ import com.exorath.plugin.basegame.manager.Manager;
 import com.exorath.plugin.basegame.state.State;
 import com.exorath.plugin.basegame.state.StateChangeEvent;
 import com.exorath.plugin.basegame.state.StateManager;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+
+import java.util.UUID;
 
 /**
  * Created by toonsev on 3/15/2017.
@@ -56,6 +60,11 @@ public class TeamManager implements Manager{
         return new UUIDTeamPlayer(uuid);
     }
 
+    public static Player getPlayer(TeamPlayer teamPlayer){
+        if(!(teamPlayer instanceof UUIDTeamPlayer))
+            return null;
+        return Bukkit.getPlayer(UUID.fromString(((UUIDTeamPlayer) teamPlayer).getUuid()));
+    }
     private static class UUIDTeamPlayer implements TeamPlayer{
         private String uuid;
         public UUIDTeamPlayer(String uuid) {
