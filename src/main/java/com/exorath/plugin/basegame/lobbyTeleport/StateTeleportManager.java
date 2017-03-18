@@ -28,10 +28,10 @@ import org.bukkit.event.EventHandler;
 /**
  * Created by toonsev on 3/18/2017.
  */
-public class LobbyTeleportManager implements ListeningManager {
+public class StateTeleportManager implements ListeningManager {
     private Location lobbySpawn;
 
-    public LobbyTeleportManager(Location lobbySpawn){
+    public StateTeleportManager(Location lobbySpawn){
         this.lobbySpawn = lobbySpawn;
         if(lobbySpawn == null)
             Main.terminate("NO lobbySpawn found");
