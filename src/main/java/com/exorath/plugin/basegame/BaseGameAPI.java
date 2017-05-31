@@ -22,6 +22,7 @@ import com.exorath.plugin.basegame.manager.Manager;
 import com.exorath.plugin.basegame.maps.MapsManager;
 import com.exorath.plugin.basegame.state.State;
 import com.exorath.plugin.basegame.state.StateManager;
+import com.exorath.plugin.basegame.victory.VictoryManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -64,6 +65,8 @@ public interface BaseGameAPI {
      * @return
      */
     StateManager getStateManager();
+
+    VictoryManager getVictoryManager();
 
     MenuAPI getMenuAPI();
 }

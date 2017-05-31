@@ -26,6 +26,7 @@ import com.exorath.plugin.basegame.maps.MapsManager;
 import com.exorath.plugin.basegame.menus.MenuManager;
 import com.exorath.plugin.basegame.state.StateManager;
 import com.exorath.plugin.basegame.team.TeamManager;
+import com.exorath.plugin.basegame.victory.VictoryManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -51,6 +52,7 @@ public class Main extends JavaPlugin {
         Main.getBaseGameAPI().addManager(new CountdownManager(baseGameAPI.getStateManager(), baseGameAPI.getTeamAPI()));
         Main.getBaseGameAPI().addManager(new ClickableEntitiesManager(this));
         Main.getBaseGameAPI().addManager(new MenuManager(new MenuAPI(this)));
+        Main.getBaseGameAPI().addManager(new VictoryManager());
 
     }
 

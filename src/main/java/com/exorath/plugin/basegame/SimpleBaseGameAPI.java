@@ -24,6 +24,7 @@ import com.exorath.plugin.basegame.maps.MapsManager;
 import com.exorath.plugin.basegame.menus.MenuManager;
 import com.exorath.plugin.basegame.state.StateManager;
 import com.exorath.plugin.basegame.team.TeamManager;
+import com.exorath.plugin.basegame.victory.VictoryManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -74,6 +75,11 @@ public class SimpleBaseGameAPI implements BaseGameAPI {
         return getManager(StateManager.class);
     }
 
+
+    @Override
+    public VictoryManager getVictoryManager(){
+        return getManager(VictoryManager.class);
+    }
     @Override
     public void onPlayerJoinGame(Player player) {
         GamePublishManager gamePublishManager = getManager(GamePublishManager.class);

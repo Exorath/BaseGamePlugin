@@ -108,5 +108,10 @@
             <artifactId>ExoMenus</artifactId>
             <version>0.0.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.exorath</groupId>
+            <artifactId>VictoryHandler</artifactId>
+            <version>0.0.4</version>
+        </dependency>
     </dependencies>
 </project>
