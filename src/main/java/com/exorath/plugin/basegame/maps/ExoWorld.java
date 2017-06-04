@@ -28,6 +28,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by toonsev on 2/6/2017.
@@ -37,26 +38,26 @@ public class ExoWorld {
     private World world;
     private FileConfiguration configuration;
 
-    public ExoWorld(String mapName){
+    public ExoWorld(String mapName) {
         this.mapName = mapName;
         File worldDir = new File(Bukkit.getWorldContainer(), mapName);
-        if(!worldDir.isDirectory())
+        if (!worldDir.isDirectory())
             Main.terminate("1V1PLUGIN ERROR: Tried to initialize world '" + mapName + "' which does not exist.");
         File configFile = new File(worldDir, "exomap.yml");
-        if(configFile.isFile())
+        if (configFile.isFile())
             configuration = YamlConfiguration.loadConfiguration(configFile);
     }
 
-    public Location getLobbySpawn(){
-        if(!configuration.contains("lobby.spawn"))
+    public Location getLobbySpawn() {
+        if (!configuration.contains("lobby.spawn"))
             Main.terminate("No lobby.spawn found in exo world config");
         return LocationSerialization.getLocation(getWorld(), configuration.getConfigurationSection("lobby.spawn"));
     }
-    public List<String> getSupportedFlavors(){
-        if(configuration == null)
+
+    public List<String> getSupportedFlavors() {
+        if (configuration == null || !configuration.contains("flavors"))
             return new ArrayList<>();
-        List<String> flavors = configuration.getStringList("flavorIds");
-        return flavors == null ? new ArrayList<>() : flavors;
+        return configuration.getKeys(false).stream().collect(Collectors.toList());
     }
 
     public String getMapName() {
@@ -67,8 +68,8 @@ public class ExoWorld {
         return configuration;
     }
 
-    public World getWorld(){
-        if(world == null)
+    public World getWorld() {
+        if (world == null)
             world = WorldCreator.name(mapName).createWorld();
         return world;
     }
