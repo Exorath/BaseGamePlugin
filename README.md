@@ -11,5 +11,5 @@ lobby:
   spawn:
     x: 0
     y: 0
-    z:
+    z: 0
 ```
