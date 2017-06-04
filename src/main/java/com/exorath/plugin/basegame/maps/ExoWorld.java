@@ -57,7 +57,7 @@ public class ExoWorld {
     public List<String> getSupportedFlavors() {
         if (configuration == null || !configuration.contains("flavors"))
             return new ArrayList<>();
-        return configuration.getKeys(false).stream().collect(Collectors.toList());
+        return configuration.getConfigurationSection("flavors").getKeys(false).stream().collect(Collectors.toList());
     }
 
     public String getMapName() {
