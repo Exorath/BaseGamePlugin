@@ -16,10 +16,10 @@
 
 package com.exorath.plugin.basegame.flavor;
 
+import com.exorath.plugin.basegame.Main;
 import com.exorath.plugin.basegame.manager.Manager;
 import org.bukkit.configuration.file.FileConfiguration;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -35,6 +35,7 @@ public class FlavorManager implements Manager {
         this.configuration = configuration;
         this.flavors = loadFlavorsFromConfig();
         this.flavor = flavors.get(random.nextInt(flavors.size()));
+        System.out.println("BaseGame selected flavor: " + flavor);
     }
 
     public String getFlavor() {
@@ -46,9 +47,9 @@ public class FlavorManager implements Manager {
     }
 
     private List<String> loadFlavorsFromConfig(){
-        List<String> flavors = configuration.getStringList("connector.flavorIds");
+        List<String> flavors = configuration.getStringList("connector.flavors");
         if(flavors == null || flavors.isEmpty())
-            return Arrays.asList(new String[]{"default"});
+            Main.terminate("No flavors found in BaseGame config");
         return flavors;
     }
 }
