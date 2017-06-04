@@ -36,7 +36,7 @@ public class StateManager implements Manager {
     public void setState(State state) {
         if (this.state == state)
             return;
-        State oldState = state;
+        State oldState = this.state;
         this.state = state;
         StateChangeEvent stateChangeEvent = new StateChangeEvent(oldState, state);
         Bukkit.getPluginManager().callEvent(stateChangeEvent);

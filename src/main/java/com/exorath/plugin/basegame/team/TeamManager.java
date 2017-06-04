@@ -34,23 +34,11 @@ import java.util.UUID;
 public class TeamManager implements Manager{
     private TeamAPI teamAPI;
 
-    private StateManager stateManager;
 
-    public TeamManager(StateManager stateManager) {
+    public TeamManager() {
         this.teamAPI = new TeamAPI();
-        this.stateManager = stateManager;
-        teamAPI.getGlobalStartRule().getObservableEvaluation().subscribe(canStart -> {
-            if(stateManager.getState() == State.WAITING_FOR_PLAYERS)
-                stateManager.setState(State.COUNTING_DOWN);
-        });
     }
 
-    @EventHandler
-    public void onStateChange(StateChangeEvent stateChangeEvent){
-        if(stateChangeEvent.getNewState() == State.WAITING_FOR_PLAYERS)
-            if(teamAPI.getGlobalStartRule().evaluate())
-                stateManager.setState(State.COUNTING_DOWN);
-    }
 
     public TeamAPI getTeamAPI() {
         return teamAPI;

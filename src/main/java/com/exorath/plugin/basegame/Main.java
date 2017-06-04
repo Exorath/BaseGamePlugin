@@ -47,7 +47,7 @@ public class Main extends JavaPlugin {
         Main.getBaseGameAPI().addManager(new GamePublishManager(getConfig(),
                 baseGameAPI.getMapsManager().getGameMap().getMapName(),
                 Main.getBaseGameAPI().getManager(FlavorManager.class).getFlavor()));
-        Main.getBaseGameAPI().addManager(new TeamManager(baseGameAPI.getStateManager()));
+        Main.getBaseGameAPI().addManager(new TeamManager());
         Main.getBaseGameAPI().addManager(new LobbyTeleportManager(baseGameAPI.getMapsManager().getGameMap().getLobbySpawn()));
         Main.getBaseGameAPI().addManager(new CountdownManager(baseGameAPI.getStateManager(), baseGameAPI.getTeamAPI()));
         Main.getBaseGameAPI().addManager(new ClickableEntitiesManager(this));

@@ -38,13 +38,17 @@ public class CountdownManager implements ListeningManager {
         this.teamAPI = teamAPI;
         teamAPI.getPlayerJoinTeamObservable().subscribe(event -> checkCountdown());
         teamAPI.getPlayerLeaveTeamObservable().subscribe(event -> checkCountdown());
+        teamAPI.getGlobalStartRule().getObservableEvaluation().subscribe(aBoolean -> System.out.println("Canstart changed to: " + aBoolean));
     }
 
     @EventHandler
     public void onStateChange(StateChangeEvent event){
         if(event.getNewState() == State.COUNTING_DOWN){
+            System.out.println("Countdown is starting");
             new CountdownTask().runTaskTimer(Main.getInstance(), 0, 20);
-        }
+        }else if(event.getNewState() == State.WAITING_FOR_PLAYERS)
+            if(teamAPI.getGlobalStartRule().evaluate())
+                stateManager.setState(State.COUNTING_DOWN);
     }
     private void checkCountdown() {
         boolean canStart = teamAPI.getGlobalStartRule().evaluate();
