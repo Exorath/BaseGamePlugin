@@ -39,7 +39,6 @@ public class TeamManager implements Manager{
         this.teamAPI = new TeamAPI();
     }
 
-
     public TeamAPI getTeamAPI() {
         return teamAPI;
     }
