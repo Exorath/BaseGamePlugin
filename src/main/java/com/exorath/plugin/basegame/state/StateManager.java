@@ -48,14 +48,12 @@ public class StateManager implements ListeningManager {
     @EventHandler
     public void preJoinEvent(AsyncPlayerPreLoginEvent event) {
         State state = getState();
-        if (state != State.WAITING_FOR_PLAYERS && state != State.COUNTING_DOWN) {
-            event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_OTHER);
-            event.setKickMessage("Game already started");
-        } else if (state != State.INITIALIZING) {
+        if (state == State.INITIALIZING) {
             event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_OTHER);
             event.setKickMessage("Game not ready");
+        } else if (state != State.WAITING_FOR_PLAYERS && state != State.COUNTING_DOWN) {
+            event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_OTHER);
+            event.setKickMessage("Game already started");
         }
     }
-
-
 }
