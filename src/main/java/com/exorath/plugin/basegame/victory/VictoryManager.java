@@ -54,6 +54,7 @@ public class VictoryManager implements ListeningManager {
     }
 
     private void emitWin(String uuid) {
+        System.out.println("Emitting win for " + uuid);
         Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
             Success success = statsServiceAPI.postStat(new PostStatReq(gameId, uuid, "wins", 1));
             if (!success.isSuccess())
