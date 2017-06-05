@@ -18,6 +18,7 @@ package com.exorath.plugin.basegame.team;
 
 import com.exorath.exoteams.TeamAPI;
 import com.exorath.exoteams.player.TeamPlayer;
+import com.exorath.plugin.basegame.manager.ListeningManager;
 import com.exorath.plugin.basegame.manager.Manager;
 import com.exorath.plugin.basegame.state.State;
 import com.exorath.plugin.basegame.state.StateChangeEvent;
@@ -25,6 +26,8 @@ import com.exorath.plugin.basegame.state.StateManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import java.util.UUID;
 
@@ -52,6 +55,7 @@ public class TeamManager implements Manager{
             return null;
         return Bukkit.getPlayer(UUID.fromString(((UUIDTeamPlayer) teamPlayer).getUuid()));
     }
+
     private static class UUIDTeamPlayer implements TeamPlayer{
         private String uuid;
         public UUIDTeamPlayer(String uuid) {

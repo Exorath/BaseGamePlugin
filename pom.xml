@@ -111,7 +111,12 @@
         <dependency>
             <groupId>com.github.exorath</groupId>
             <artifactId>VictoryHandler</artifactId>
-            <version>0.0.4</version>
+            <version>0.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.exorath</groupId>
+            <artifactId>StatsService</artifactId>
+            <version>0.0.1</version>
         </dependency>
     </dependencies>
 </project>

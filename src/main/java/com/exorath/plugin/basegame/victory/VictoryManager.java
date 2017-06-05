@@ -16,19 +16,32 @@
 
 package com.exorath.plugin.basegame.victory;
 
+import com.exorath.plugin.basegame.manager.ListeningManager;
 import com.exorath.plugin.basegame.manager.Manager;
+import com.exorath.service.stats.api.StatsServiceAPI;
 import com.exorath.victoryHandler.VictoryHandlerAPI;
+import com.exorath.victoryHandler.VictoryHandoutEvent;
 
 /**
  * Created by toonsev on 5/31/2017.
  */
-public class VictoryManager implements Manager {
+public class VictoryManager implements ListeningManager {
+    private StatsServiceAPI statsServiceAPI;
     private VictoryHandlerAPI victoryHandlerAPI;
-    public VictoryManager() {
+    public VictoryManager(StatsServiceAPI statsServiceAPI) {
+        this.statsServiceAPI = statsServiceAPI;
         this.victoryHandlerAPI = new VictoryHandlerAPI();
     }
 
     public VictoryHandlerAPI getVictoryHandlerAPI() {
         return victoryHandlerAPI;
+    }
+
+    public void onVictoryHandout(VictoryHandoutEvent event){
+        event.getVictoryHandlerAPI().getVictoryPlayersByUUID().forEach((uuid, victoryPlayer) -> {
+                    if(victoryPlayer.getPosition() != null && victoryPlayer.getPosition() == 1){
+
+                    }
+                });
     }
 }

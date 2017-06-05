@@ -27,6 +27,7 @@ import com.exorath.plugin.basegame.menus.MenuManager;
 import com.exorath.plugin.basegame.state.StateManager;
 import com.exorath.plugin.basegame.team.TeamManager;
 import com.exorath.plugin.basegame.victory.VictoryManager;
+import com.exorath.service.stats.api.StatsServiceAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -52,8 +53,7 @@ public class Main extends JavaPlugin {
         Main.getBaseGameAPI().addManager(new CountdownManager(baseGameAPI.getStateManager(), baseGameAPI.getTeamAPI()));
         Main.getBaseGameAPI().addManager(new ClickableEntitiesManager(this));
         Main.getBaseGameAPI().addManager(new MenuManager(new MenuAPI(this)));
-        Main.getBaseGameAPI().addManager(new VictoryManager());
-
+        Main.getBaseGameAPI().addManager(new VictoryManager(new StatsServiceAPI(getStatsServiceAddress())));
     }
 
     public static Main getInstance() {
@@ -77,6 +77,15 @@ public class Main extends JavaPlugin {
         Bukkit.shutdown();
         System.out.println("Termination failed, force exiting system...");
         System.exit(1);
+    }
+
+
+
+    private String getStatsServiceAddress() {
+        String address = System.getenv("STATS_SERVICE_ADDRESS");
+        if (address == null)
+            Main.terminate("No STATS_SERVICE_ADDRESS env found.");
+        return address;
     }
 
 }
