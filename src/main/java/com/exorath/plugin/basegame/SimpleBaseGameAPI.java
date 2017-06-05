@@ -81,6 +81,12 @@ public class SimpleBaseGameAPI implements BaseGameAPI {
         return getManager(VictoryManager.class);
     }
 
+
+    @Override
+    public GamePublishManager getGamePublishManager() {
+        return getManager(GamePublishManager.class);
+    }
+
     @Override
     public void onPlayerJoinGame(Player player) {
         GamePublishManager gamePublishManager = getManager(GamePublishManager.class);

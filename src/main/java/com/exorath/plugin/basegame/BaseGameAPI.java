@@ -18,6 +18,7 @@ package com.exorath.plugin.basegame;
 
 import com.exorath.exomenus.MenuAPI;
 import com.exorath.exoteams.TeamAPI;
+import com.exorath.plugin.basegame.gamePublisher.GamePublishManager;
 import com.exorath.plugin.basegame.manager.Manager;
 import com.exorath.plugin.basegame.maps.MapsManager;
 import com.exorath.plugin.basegame.state.State;
@@ -67,6 +68,8 @@ public interface BaseGameAPI {
     StateManager getStateManager();
 
     VictoryManager getVictoryManager();
+
+    GamePublishManager getGamePublishManager();
 
     MenuAPI getMenuAPI();
 }

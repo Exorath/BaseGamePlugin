@@ -49,7 +49,7 @@ public class GamePublishManager implements Manager{
     }
 
 
-    private String getGameId(){
+    public String getGameId(){
         if(!configuration.contains("connector.gameId"))
             Main.terminate("MainLobbyPlugin config does not contain connector.gameId, exiting");
         return configuration.getString("connector.gameId");

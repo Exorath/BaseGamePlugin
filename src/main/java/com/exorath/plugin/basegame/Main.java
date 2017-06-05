@@ -38,6 +38,7 @@ public class Main extends JavaPlugin {
     private static Main instance;
     private static BaseGameAPI baseGameAPI;
 
+
     @Override
     public void onEnable() {
         Main.instance = this;
@@ -53,7 +54,7 @@ public class Main extends JavaPlugin {
         Main.getBaseGameAPI().addManager(new CountdownManager(baseGameAPI.getStateManager(), baseGameAPI.getTeamAPI()));
         Main.getBaseGameAPI().addManager(new ClickableEntitiesManager(this));
         Main.getBaseGameAPI().addManager(new MenuManager(new MenuAPI(this)));
-        Main.getBaseGameAPI().addManager(new VictoryManager(new StatsServiceAPI(getStatsServiceAddress())));
+        Main.getBaseGameAPI().addManager(new VictoryManager(baseGameAPI.getGamePublishManager().getGameId(), new StatsServiceAPI(getStatsServiceAddress())));
     }
 
     public static Main getInstance() {
@@ -71,6 +72,7 @@ public class Main extends JavaPlugin {
         System.out.println("Termination failed, force exiting system...");
         System.exit(1);
     }
+
     public static void terminate(String message) {
         System.out.println(message);
         System.out.println("1v1Plugin is terminating...");
@@ -78,7 +80,6 @@ public class Main extends JavaPlugin {
         System.out.println("Termination failed, force exiting system...");
         System.exit(1);
     }
-
 
 
     private String getStatsServiceAddress() {
