@@ -33,7 +33,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class CountdownManager implements ListeningManager {
     private StateManager stateManager;
     private TeamAPI teamAPI;
-    public CountdownManager(StateManager stateManager, TeamAPI teamAPI){
+
+    public CountdownManager(StateManager stateManager, TeamAPI teamAPI) {
         this.stateManager = stateManager;
         this.teamAPI = teamAPI;
         teamAPI.getPlayerJoinTeamObservable().subscribe(event -> checkCountdown());
@@ -42,15 +43,18 @@ public class CountdownManager implements ListeningManager {
     }
 
     @EventHandler
-    public void onStateChange(StateChangeEvent event){
-        if(event.getNewState() == State.COUNTING_DOWN){
+    public void onStateChange(StateChangeEvent event) {
+        if (event.getNewState() == State.COUNTING_DOWN) {
             System.out.println("Countdown is starting");
             new CountdownTask().runTaskTimer(Main.getInstance(), 0, 20);
-        }else if(event.getNewState() == State.WAITING_FOR_PLAYERS)
-            if(teamAPI.getGlobalStartRule().evaluate())
+        } else if (event.getNewState() == State.WAITING_FOR_PLAYERS)
+            if (teamAPI.getGlobalStartRule().evaluate())
                 stateManager.setState(State.COUNTING_DOWN);
     }
+
     private void checkCountdown() {
+        if (stateManager.getState().equals(State.STARTED) || stateManager.getState().equals(State.STOPPING))
+            return;
         boolean canStart = teamAPI.getGlobalStartRule().evaluate();
         if (canStart) {
             if (stateManager.getState().equals(State.WAITING_FOR_PLAYERS)) {
@@ -58,7 +62,7 @@ public class CountdownManager implements ListeningManager {
             }
         } else if (stateManager.getState().equals(State.COUNTING_DOWN)) {
             stateManager.setState(State.WAITING_FOR_PLAYERS);
-        }else {
+        } else {
             Bukkit.broadcastMessage("Waiting for more players...");
         }
     }

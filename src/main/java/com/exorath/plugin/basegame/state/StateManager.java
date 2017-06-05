@@ -16,24 +16,27 @@
 
 package com.exorath.plugin.basegame.state;
 
+import com.exorath.plugin.basegame.manager.ListeningManager;
 import com.exorath.plugin.basegame.manager.Manager;
 import org.bukkit.Bukkit;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
 /**
  * Created by toonsev on 3/14/2017.
  */
-public class StateManager implements Manager {
+public class StateManager implements ListeningManager {
     private State state = null;
 
     public StateManager() {
         setState(State.INITIALIZING);
     }
 
-    public State getState() {
+    public synchronized State getState() {
         return state;
     }
 
-    public void setState(State state) {
+    public synchronized void setState(State state) {
         if (this.state == state)
             return;
         State oldState = this.state;
@@ -41,4 +44,18 @@ public class StateManager implements Manager {
         StateChangeEvent stateChangeEvent = new StateChangeEvent(oldState, state);
         Bukkit.getPluginManager().callEvent(stateChangeEvent);
     }
+
+    @EventHandler
+    public void preJoinEvent(AsyncPlayerPreLoginEvent event) {
+        State state = getState();
+        if (state != State.WAITING_FOR_PLAYERS && state != State.COUNTING_DOWN) {
+            event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_OTHER);
+            event.setKickMessage("Game already started");
+        } else if (state != State.INITIALIZING) {
+            event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_OTHER);
+            event.setKickMessage("Game not ready");
+        }
+    }
+
+
 }
