@@ -18,7 +18,7 @@ package com.exorath.plugin.basegame.gamePublisher;
 
 import com.exorath.plugin.base.ExoBaseAPI;
 import com.exorath.plugin.basegame.Main;
-import com.exorath.plugin.basegame.manager.Manager;
+import com.exorath.plugin.base.manager.Manager;
 import com.exorath.service.connector.res.BasicServer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;

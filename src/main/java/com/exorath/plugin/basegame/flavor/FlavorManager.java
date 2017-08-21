@@ -17,7 +17,7 @@
 package com.exorath.plugin.basegame.flavor;
 
 import com.exorath.plugin.basegame.Main;
-import com.exorath.plugin.basegame.manager.Manager;
+import com.exorath.plugin.base.manager.Manager;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.List;

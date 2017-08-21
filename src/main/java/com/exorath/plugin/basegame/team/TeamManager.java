@@ -18,17 +18,9 @@ package com.exorath.plugin.basegame.team;
 
 import com.exorath.exoteams.TeamAPI;
 import com.exorath.exoteams.player.TeamPlayer;
-import com.exorath.plugin.basegame.manager.ListeningManager;
-import com.exorath.plugin.basegame.manager.Manager;
-import com.exorath.plugin.basegame.state.State;
-import com.exorath.plugin.basegame.state.StateChangeEvent;
-import com.exorath.plugin.basegame.state.StateManager;
+import com.exorath.plugin.base.manager.Manager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-
 import java.util.UUID;
 
 /**

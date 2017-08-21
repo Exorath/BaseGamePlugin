@@ -89,7 +89,7 @@
         <dependency>
             <groupId>com.github.Exorath</groupId>
             <artifactId>ExoBasePlugin</artifactId>
-            <version>f6a1372b0b</version>
+            <version>1.4.0</version>
             <scope>provided</scope>
         </dependency>
 
@@ -106,7 +106,8 @@
         <dependency>
             <groupId>com.github.Exorath</groupId>
             <artifactId>ExoMenus</artifactId>
-            <version>0.0.2</version>
+            <version>0.0.4</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.github.exorath</groupId>

@@ -17,9 +17,8 @@
 package com.exorath.plugin.basegame.countdown;
 
 import com.exorath.exoteams.TeamAPI;
-import com.exorath.plugin.basegame.BaseGameAPI;
 import com.exorath.plugin.basegame.Main;
-import com.exorath.plugin.basegame.manager.ListeningManager;
+import com.exorath.plugin.base.manager.ListeningManager;
 import com.exorath.plugin.basegame.state.State;
 import com.exorath.plugin.basegame.state.StateChangeEvent;
 import com.exorath.plugin.basegame.state.StateManager;

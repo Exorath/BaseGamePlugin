@@ -35,11 +35,6 @@ import org.bukkit.entity.Player;
  * Created by toonsev on 3/14/2017.
  */
 public interface BaseGameAPI {
-    void addManager(Manager manager);
-
-    <T extends Manager> T getManager(Class<T> managerClass);
-
-    <T extends Manager> void removeManager(Class<T> managerClass);
 
     TeamAPI getTeamAPI();
     MapsManager getMapsManager();

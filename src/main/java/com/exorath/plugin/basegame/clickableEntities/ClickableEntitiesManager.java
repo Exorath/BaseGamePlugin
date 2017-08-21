@@ -17,7 +17,7 @@
 package com.exorath.plugin.basegame.clickableEntities;
 
 import com.exorath.clickents.ClickEntAPI;
-import com.exorath.plugin.basegame.manager.Manager;
+import com.exorath.plugin.base.manager.Manager;
 import org.bukkit.plugin.Plugin;
 
 /**

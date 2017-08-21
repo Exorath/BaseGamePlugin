@@ -16,8 +16,7 @@
 
 package com.exorath.plugin.basegame.state;
 
-import com.exorath.plugin.basegame.manager.ListeningManager;
-import com.exorath.plugin.basegame.manager.Manager;
+import com.exorath.plugin.base.manager.ListeningManager;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;

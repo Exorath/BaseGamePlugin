@@ -17,6 +17,7 @@
 package com.exorath.plugin.basegame;
 
 import com.exorath.exomenus.MenuAPI;
+import com.exorath.plugin.base.ExoBaseAPI;
 import com.exorath.plugin.basegame.clickableEntities.ClickableEntitiesManager;
 import com.exorath.plugin.basegame.countdown.CountdownManager;
 import com.exorath.plugin.basegame.flavor.FlavorManager;
@@ -37,24 +38,26 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin {
     private static Main instance;
     private static BaseGameAPI baseGameAPI;
+    private ExoBaseAPI exoBaseAPI;
 
 
     @Override
     public void onEnable() {
         Main.instance = this;
         Main.baseGameAPI = new SimpleBaseGameAPI();
-        Main.getBaseGameAPI().addManager(new FlavorManager(getConfig()));
-        Main.getBaseGameAPI().addManager(new StateManager());
-        Main.getBaseGameAPI().addManager(new MapsManager(baseGameAPI.getManager(FlavorManager.class).getFlavor()));
-        Main.getBaseGameAPI().addManager(new GamePublishManager(getConfig(),
+        this.exoBaseAPI = ExoBaseAPI.getInstance();
+        exoBaseAPI.registerManager(new FlavorManager(getConfig()));
+        exoBaseAPI.registerManager(new StateManager());
+        exoBaseAPI.registerManager(new MapsManager(exoBaseAPI.getManager(FlavorManager.class).getFlavor()));
+        exoBaseAPI.registerManager(new GamePublishManager(getConfig(),
                 baseGameAPI.getMapsManager().getGameMap().getMapName(),
-                Main.getBaseGameAPI().getManager(FlavorManager.class).getFlavor()));
-        Main.getBaseGameAPI().addManager(new TeamManager());
-        Main.getBaseGameAPI().addManager(new LobbyTeleportManager(baseGameAPI.getMapsManager().getGameMap().getLobbySpawn()));
-        Main.getBaseGameAPI().addManager(new CountdownManager(baseGameAPI.getStateManager(), baseGameAPI.getTeamAPI()));
-        Main.getBaseGameAPI().addManager(new ClickableEntitiesManager(this));
-        Main.getBaseGameAPI().addManager(new MenuManager(new MenuAPI(this)));
-        Main.getBaseGameAPI().addManager(new VictoryManager(baseGameAPI.getGamePublishManager().getGameId(), new StatsServiceAPI(getStatsServiceAddress())));
+                exoBaseAPI.getManager(FlavorManager.class).getFlavor()));
+        exoBaseAPI.registerManager(new TeamManager());
+        exoBaseAPI.registerManager(new LobbyTeleportManager(baseGameAPI.getMapsManager().getGameMap().getLobbySpawn()));
+        exoBaseAPI.registerManager(new CountdownManager(baseGameAPI.getStateManager(), baseGameAPI.getTeamAPI()));
+        exoBaseAPI.registerManager(new ClickableEntitiesManager(this));
+        exoBaseAPI.registerManager(new MenuManager(new MenuAPI(this)));
+        exoBaseAPI.registerManager(new VictoryManager(baseGameAPI.getGamePublishManager().getGameId(), new StatsServiceAPI(getStatsServiceAddress())));
     }
 
     public static Main getInstance() {

@@ -17,7 +17,7 @@
 package com.exorath.plugin.basegame.menus;
 
 import com.exorath.exomenus.MenuAPI;
-import com.exorath.plugin.basegame.manager.Manager;
+import com.exorath.plugin.base.manager.Manager;
 
 /**
  * Created by toonsev on 3/18/2017.

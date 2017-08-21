@@ -17,8 +17,7 @@
 package com.exorath.plugin.basegame.victory;
 
 import com.exorath.plugin.basegame.Main;
-import com.exorath.plugin.basegame.manager.ListeningManager;
-import com.exorath.plugin.basegame.manager.Manager;
+import com.exorath.plugin.base.manager.ListeningManager;
 import com.exorath.service.stats.api.StatsServiceAPI;
 import com.exorath.service.stats.res.PostStatReq;
 import com.exorath.service.stats.res.Success;
