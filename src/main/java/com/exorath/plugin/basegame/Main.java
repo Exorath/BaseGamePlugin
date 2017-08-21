@@ -56,7 +56,7 @@ public class Main extends JavaPlugin {
         exoBaseAPI.registerManager(new LobbyTeleportManager(baseGameAPI.getMapsManager().getGameMap().getLobbySpawn()));
         exoBaseAPI.registerManager(new CountdownManager(baseGameAPI.getStateManager(), baseGameAPI.getTeamAPI()));
         exoBaseAPI.registerManager(new ClickableEntitiesManager(this));
-        exoBaseAPI.registerManager(new MenuManager(new MenuAPI(this)));
+        exoBaseAPI.registerManager(new MenuManager());
         exoBaseAPI.registerManager(new VictoryManager(baseGameAPI.getGamePublishManager().getGameId(), new StatsServiceAPI(getStatsServiceAddress())));
     }
 

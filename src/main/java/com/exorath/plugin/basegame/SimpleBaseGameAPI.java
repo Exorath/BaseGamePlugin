@@ -16,12 +16,10 @@
 
 package com.exorath.plugin.basegame;
 
-import com.exorath.exomenus.MenuAPI;
 import com.exorath.exoteams.TeamAPI;
 import com.exorath.plugin.base.ExoBaseAPI;
 import com.exorath.plugin.basegame.gamePublisher.GamePublishManager;
 import com.exorath.plugin.basegame.maps.MapsManager;
-import com.exorath.plugin.basegame.menus.MenuManager;
 import com.exorath.plugin.basegame.state.StateManager;
 import com.exorath.plugin.basegame.team.TeamManager;
 import com.exorath.plugin.basegame.victory.VictoryManager;
@@ -41,11 +39,6 @@ public class SimpleBaseGameAPI implements BaseGameAPI {
     public TeamAPI getTeamAPI() {
         TeamManager teamManager = exoBaseAPI.getManager(TeamManager.class);
         return teamManager == null ? null : teamManager.getTeamAPI();
-    }
-
-    @Override
-    public MenuAPI getMenuAPI() {
-        return exoBaseAPI.getManager(MenuManager.class).getMenuAPI();
     }
 
     @Override
