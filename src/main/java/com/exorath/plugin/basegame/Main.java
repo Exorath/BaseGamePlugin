@@ -16,7 +16,6 @@
 
 package com.exorath.plugin.basegame;
 
-import com.exorath.exomenus.MenuAPI;
 import com.exorath.plugin.base.ExoBaseAPI;
 import com.exorath.plugin.basegame.clickableEntities.ClickableEntitiesManager;
 import com.exorath.plugin.basegame.countdown.CountdownManager;
@@ -24,7 +23,6 @@ import com.exorath.plugin.basegame.flavor.FlavorManager;
 import com.exorath.plugin.basegame.gamePublisher.GamePublishManager;
 import com.exorath.plugin.basegame.lobbyTeleport.LobbyTeleportManager;
 import com.exorath.plugin.basegame.maps.MapsManager;
-import com.exorath.plugin.basegame.menus.MenuManager;
 import com.exorath.plugin.basegame.state.StateManager;
 import com.exorath.plugin.basegame.team.TeamManager;
 import com.exorath.plugin.basegame.victory.VictoryManager;
@@ -56,7 +54,6 @@ public class Main extends JavaPlugin {
         exoBaseAPI.registerManager(new LobbyTeleportManager(baseGameAPI.getMapsManager().getGameMap().getLobbySpawn()));
         exoBaseAPI.registerManager(new CountdownManager(baseGameAPI.getStateManager(), baseGameAPI.getTeamAPI()));
         exoBaseAPI.registerManager(new ClickableEntitiesManager(this));
-        exoBaseAPI.registerManager(new MenuManager());
         exoBaseAPI.registerManager(new VictoryManager(baseGameAPI.getGamePublishManager().getGameId(), new StatsServiceAPI(getStatsServiceAddress())));
     }
 
